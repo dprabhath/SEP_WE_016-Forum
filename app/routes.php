@@ -12,6 +12,7 @@
 */
 
 Route::get('/', array('uses' => 'HomeController@hello', 'as' => 'home'));
+Route::get('/forums', 'ForumController@index');
 
 Route::group(array('prefix' => '/forum'), function()
 {
@@ -60,4 +61,59 @@ Route::group(array('before' => 'guest'), function()
 Route::group(array('before' => 'auth'), function()
 {
 	Route::get('/user/logout', array('uses' => 'UserController@getLogout', 'as' => 'getLogout'));
+});
+
+
+//Social Login Routes
+Route::get('/user/login/fb', function() {
+    $facebook = new Facebook(Config::get('facebook'));
+    $params = array(
+        'redirect_uri' => url('/login/fb/callback'),
+        'scope' => 'email',
+    );
+    return Redirect::to($facebook->getLoginUrl($params));
+});
+
+
+
+
+Route::get('login/fb/callback', function() {
+    $code = Input::get('code');
+    if (strlen($code) == 0) return Redirect::to('/')->with('message', 'There was an error communicating with Facebook');
+
+    $facebook = new Facebook(Config::get('facebook'));
+    $uid = $facebook->getUser();
+
+    if ($uid == 0) return Redirect::to('/')->with('message', 'There was an error');
+
+    $me = $facebook->api('/me');
+
+    $profile = Profile::whereUid($uid)->first();
+    if (empty($profile)) {
+$me = $facebook->api('/v2.4/me?fields=first_name');
+$me1 = $facebook->api('/v2.4/me?fields=last_name');
+$me2 = $facebook->api('/v2.4/me?fields=email');
+
+        $user = new User;
+        $user->name = $me['first_name'].' '.$me1['last_name'];
+        $user->email = $me2['email'];
+        //$user->photo = 'https://graph.facebook.com/'.$me['username'].'/picture?type=large';
+
+        $user->save();
+
+        $profile = new Profile();
+        $profile->uid = $uid;
+        $profile->username = '';
+        $profile = $user->profiles()->save($profile);
+    }
+
+    $profile->access_token = $facebook->getAccessToken();
+    $profile->save();
+
+    $user = $profile->user;
+
+    Auth::login($user);
+
+    return Redirect::to('/forums')->with('message', 'Logged in with Facebook');
+	
 });

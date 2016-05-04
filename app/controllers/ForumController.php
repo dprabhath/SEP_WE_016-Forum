@@ -2,6 +2,7 @@
 
 class ForumController extends BaseController
 {
+	//Forum home page, Displaying groups with categories
 	public function index()
 	{
 		$groups = ForumGroup::all();
@@ -9,7 +10,7 @@ class ForumController extends BaseController
 		
 		return View::make('forum.index')->with('groups', $groups)->with('categories', $categories);
 	}
-
+//Once a user click on a category then redirects here and displaying threds under that category
 	public function category($id)
 	{
 		$category = ForumCategory::find($id);
@@ -21,7 +22,7 @@ class ForumController extends BaseController
 
 		return View::make('forum.category')->with('category', $category)->with('threads', $threads);
 	}
-
+//Once user click on a thread, redirects to the particular thread.
 	public function thread($id)
 	{
 		$thread = ForumThread::find($id);
@@ -33,7 +34,7 @@ class ForumController extends BaseController
 
 		return View::make('forum.thread')->with('thread', $thread)->with('author', $author);
 	}
-
+//Storing new groups to the database, Validating group name
 	public function storeGroup()
 	{
 		$validator = Validator::make(Input::all(), array(
@@ -59,7 +60,8 @@ class ForumController extends BaseController
 			}
 		}
 	}
-
+//deleting a group. If categories count is greater than 0, categories should be deleted.
+// Samething happens to threads and comments. Before deleting a group that needed to be verified.
 	public function deleteGroup($id)
 	{
 		$group = ForumGroup::find($id);
@@ -99,7 +101,7 @@ class ForumController extends BaseController
 			return Redirect::route('forum-home')->with('fail', 'An error occured while deleting the group.');
 		}
 	}
-
+//deleting category. Needs to check whether threads and commnets are available under that category
 	public function deleteCategory($id)
 	{
 		$category = ForumCategory::find($id);
@@ -133,7 +135,7 @@ class ForumController extends BaseController
 			return Redirect::route('forum-home')->with('fail', 'An error occured while deleting the category.');
 		}
 	}
-
+//storing categories
 	public function storeCategory($id)
 	{
 		$validator = Validator::make(Input::all(), array(
@@ -166,7 +168,7 @@ class ForumController extends BaseController
 			}
 		}
 	}
-
+//Adding a new thread
 	public function newThread($id)
 	{
 		return View::make('forum.newthread')->with('id', $id);
@@ -206,7 +208,7 @@ class ForumController extends BaseController
 			}
 		}
 	}
-
+//deleting a thread
 	public function deleteThread($id)
 	{
 		$thread = ForumThread::find($id);
@@ -230,7 +232,7 @@ class ForumController extends BaseController
 				return Redirect::route('forum-category', $category_id)->with('fail', "An error occured while deleting the thread.");
 		}
 	}
-
+//storing comments
 	public function storeComment($id)
 	{
 		$thread = ForumThread::find($id);
@@ -258,7 +260,7 @@ class ForumController extends BaseController
 				return Redirect::route('forum-thread', $id)->with('fail', "An error occured wile saving.");
 		}
 	}
-
+//deling comments
 	public function deleteComment($id)
 	{
 		$comment = ForumComment::find($id);

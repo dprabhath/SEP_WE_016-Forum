@@ -11,4 +11,5 @@ return array(
     'Patchwork\\' => array($vendorDir . '/patchwork/utf8/src/Patchwork'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Golonka\\BBCode\\' => array($vendorDir . '/golonka/bbcodeparser/src'),
+    'AlgoliaSearch\\Laravel\\' => array($vendorDir . '/algolia/algoliasearch-laravel-4/src'),
 );

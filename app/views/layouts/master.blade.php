@@ -3,8 +3,13 @@
 <head>
 	@section('head')
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	
+<!-- including scripts and css files needed to run the application via CDN -->
+	<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="https://bootswatch.com/spacelab/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/css/social-buttons.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	@show
 </head>
 <body>
@@ -16,13 +21,16 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="{{ URL::route('home') }}" class="navbar-brand">Wedaduru Forum</a>
+				<a href="{{ URL::route('forum-home') }}" class="navbar-brand">Wedaduru Forum</a>
 			</div>
 			<div class="navbar-collapse collapse navbar-responsive-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="{{ URL::route('home') }}">Home</a></li>
-				<li><a href="{{ URL::route('forum-home') }}">Forums</a></li>
+				
+			
+				
 			</ul>
+			
+			<!-- Main navigation bar -->
 			<ul class="nav navbar-nav navbar-right">
 				@if(!Auth::check())
 					<li><a href="{{ URL::route('getCreate') }}">Register</a></li>
@@ -34,18 +42,19 @@
 		</div>
 		</div>
 	</div>
-
+<!-- Displaying alerts -->
 	@if(Session::has('success'))
-		<div class="alert alert-success">{{ Session::get('success') }}</div>
+		<div align="center" class="alert alert-success">{{ Session::get('success') }}</div>
 	@elseif (Session::has('fail'))
-		<div class="alert alert-danger">{{ Session::get('fail') }}</div>
+		<div align="center" class="alert alert-danger">{{ Session::get('fail') }}</div>
 	@endif
 	
 	<div class="container">@yield('content')</div>
 
 	@section('javascript')
-		<script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	@show
+	<div align="center"> &copy;Wedaduru 2016</div>
 </body>
 </html>

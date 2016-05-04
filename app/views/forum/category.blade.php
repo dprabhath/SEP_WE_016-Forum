@@ -5,6 +5,10 @@
 	<title>Forum | {{ $category->title }}</title>
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
 	<script>
+	
+	
+	
+	
 	$(document).ready(function ()
 {
 	$("#form_submit").click(function()
@@ -61,6 +65,8 @@
 		</div>
 		@endif
 	</div>
+	
+	
 	<div class="panel-body panel-list-group">
 		<div class="list-group">
 			@foreach($threads as $thread)
@@ -68,6 +74,8 @@
 			@endforeach
 		</div>
 	</div>
+	
+	
 </div>
 
 @if(Auth::check() && Auth::user()->isAdmin())

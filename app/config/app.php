@@ -123,6 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		'Golonka\BBCode\BBCodeParserServiceProvider',
+		'RyanNielson\Shareable\ShareableServiceProvider',
 
 	),
 
@@ -192,6 +193,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		'BBCode' 		  => 'Golonka\BBCode\Facades\BBCodeParser',
+		'Shareable' => 'RyanNielson\Shareable\Facades\Shareable',
 
 	),
 

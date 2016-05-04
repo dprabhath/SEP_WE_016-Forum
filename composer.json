@@ -5,7 +5,11 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"golonka/bbcodeparser": "^2.2"
+		"golonka/bbcodeparser": "^2.2",
+		"hybridauth/hybridauth":"dev-master",
+		"facebook/php-sdk": "^3.2",
+		"ryannielson/shareable": "1.0.*",
+		"algolia/algoliasearch-laravel-4": "^1.0"
 	},
 	"autoload": {
 		"classmap": [
@@ -34,4 +38,6 @@
 		"preferred-install": "dist"
 	},
 	"minimum-stability": "stable"
+	
+	
 }

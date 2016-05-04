@@ -42,5 +42,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return($this->isAdmin ==1);
 	}
-
+public function profiles()
+    {
+        return $this->hasMany('Profile');
+    }
 }

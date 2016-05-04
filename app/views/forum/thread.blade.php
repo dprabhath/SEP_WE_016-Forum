@@ -6,6 +6,8 @@
 @stop
 
 @section('content')
+
+<!-- Viewing threads -->
 	<div class="clearfix">
 		<ol class="breadcrumb pull-left">
 			<li><a href="{{ URL::route('forum-home') }}">Forums</a></li>
@@ -34,7 +36,12 @@
 				<a href="{{ URL::route('forum-delete-comment', $comment->id) }}" class="btn btn-danger">Delete Comment</a>
 			@endif
 		</div>
+	
 	@endforeach
+		<div>
+		{{ Shareable::facebook($options = array()) }}
+		{{ Shareable::googlePlus($options = array()) }}
+		{{ Shareable::twitter($options = array()) }}</div>
 
 	@if(Auth::check())
 		<form action="{{ URL::route('forum-store-comment', $thread->id) }}" method="post">

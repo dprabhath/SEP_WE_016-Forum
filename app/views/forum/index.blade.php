@@ -1,9 +1,12 @@
 @extends('layouts.master')
 
 @section('head')
+			
 	@parent
 	<title>Forums</title>
-	<script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+
+	<!-- Scripts needed to be loaded (bootstrap and jquery modals) -->
 	<script>
 	$(document).ready(function ()
 {
@@ -26,18 +29,38 @@
 
 	$(".delete_group").click(function(event)
 	{
-		$("#btn_delete_group").prop('href', 'http://localhost/forum4-error/public/forum/group/' + event.target.id + '/delete');
+		
+		$("#btn_delete_group").prop('href', 'https://sep.altairsl.us/forum/public/forum/group/' + event.target.id + '/delete');
 	});
 
 	$(".delete_category").click(function(event)
 	{
-		$("#btn_delete_category").prop('href', 'http://localhost/forum4-error/public/forum/category/' + event.target.id + '/delete');
+		$("#btn_delete_category").prop('href', 'https://sep.altairsl.us/forum/public/forum/category/' + event.target.id + '/delete');
 	});
 });
 	</script>
 @stop
 
 @section('content')
+<center>
+
+<!-- Search -->
+<input type="text" class="st-default-search-input" value="" width="100000px" placeholder="Search the Forum..">
+					
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+  
+  _st('install','DcpnrEtyffBAKBscxxnA','2.0.0');
+</script>
+
+
+</center>
+
+
+
 
 @if(Auth::check() && Auth::user()->isAdmin())
 	<a href="#" class="btn btn-default" data-toggle="modal" data-target="#group_form">Add Group</a>
@@ -64,6 +87,7 @@
 					@endif
 				@endforeach
 			</div>
+			
 		</div>
 	</div>
 @endforeach

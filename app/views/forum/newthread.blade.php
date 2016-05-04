@@ -6,6 +6,9 @@
 @stop
 
 @section('content')
+
+
+<!-- Adding a new thread -->
 	<h1>New thread</h1>
 
 	<form action="{{ URL::route('forum-store-thread', $id) }}" method="post">
